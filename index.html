@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ASL Landmark Catalog</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;700&family=IBM+Plex+Sans:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav id="nav">
+      <div id="nav-logo">ASL<span class="accent">:</span>CATALOG</div>
+      <button id="reset">reset</button>
+    </nav>
+
+    <main id="main" class="page-inner">
+      <div class="hero">
+        <h1 class="hero-title">American Sign Language Landmarks</h1>
+        <p class="hero-desc">
+          A dictionary catalog storing 3D hand coordinates for American Sign
+          Language. Each entry contains landmark keyframes rendered as a
+          skeleton animation using canvas. You can search words, filter by
+          category, sort data, view animations, edit sign details, and delete
+          entries.
+        </p>
+        <div
+          class="hero-label"
+          style="margin-top: 16px; text-transform: none; opacity: 0.8"
+        >
+          * Data Origin: All landmark keyframes were pre-extracted from original
+          signing footage via an independent MediaPipe utility.
+        </div>
+      </div>
+
+      <div class="controls-bar">
+        <input
+          type="text"
+          id="search-input"
+          placeholder="SEARCH SIGNS..."
+          class="search-input"
+        />
+
+        <!-- category filter -->
+        <select id="filter-category" class="filter-select">
+          <option value="">ALL CATEGORIES</option>
+        </select>
+
+        <!-- sorting -->
+        <select id="sort-select" class="filter-select">
+          <option value="alpha-asc">A → Z</option>
+          <option value="alpha-desc">Z → A</option>
+          <option value="date-new">NEWEST FIRST</option>
+          <option value="frames-high">MOST FRAMES</option>
+        </select>
+      </div>
+
+      <!-- gesture list -->
+      <!-- if no gesture.js -->
+      <div class="empty-state hidden" id="empty-state">
+        <span class="empty-icon">◻</span>
+        <p>No signs found in the catalog.</p>
+      </div>
+
+      <div id="gesture-list"></div>
+    </main>
+
+    <!-- detail panel -->
+    <div id="detail-panel" class="detail-panel hidden">
+      <div class="detail-inner">
+        <div class="detail-header">
+          <div class="detail-title-block">
+            <div class="detail-word" id="detail-word"></div>
+            <div class="detail-meaning" id="detail-meaning"></div>
+          </div>
+          <div class="detail-actions">
+            <button id="detail-close" class="btn-outline detail-close-btn">
+              ✕ CLOSE
+            </button>
+          </div>
+        </div>
+
+        <div class="detail-meta-row" id="detail-meta-row"></div>
+
+        <!-- animation -->
+        <div class="detail-canvas-wrap">
+          <canvas id="detail-canvas"></canvas>
+          <div class="detail-canvas-label" id="detail-frame-label">
+            FRAME 1 / 1
+          </div>
+        </div>
+
+        <div class="detail-controls">
+          <button id="anim-play-pause" class="btn-outline">⏸ PAUSE</button>
+
+          <div class="anim-speed-row">
+            <span class="form-label">SPEED</span>
+            <input type="range" id="anim-speed" min="1" max="10" value="5" />
+          </div>
+
+          <div class="anim-trail-row">
+            <span class="form-label">MOTION TRAIL</span>
+            <input
+              type="number"
+              id="anim-trail"
+              class="anim-trail-input"
+              min="0"
+              value="0"
+            />
+            <span class="trail-max-label" id="trail-max-label">max: 0</span>
+          </div>
+
+          <div class="detail-desc" id="detail-desc"></div>
+        </div>
+      </div>
+    </div>
+
+    <footer id="footer">
+      <span>ASL LANDMARK CATALOG</span>
+      <span>VANILLA JS · NO SERVER</span>
+    </footer>
+
+    <script type="module" src="scripts.js"></script>
+  </body>
+</html>
