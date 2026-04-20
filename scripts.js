@@ -238,6 +238,7 @@ function resetData() {
   if (!confirm("Reset all deleted gestures?")) return;
   localStorage.removeItem(LS_DELETE_IDS);
   renderDictionary();
+  populatedCategoryFilter();
 }
 
 elResetDataButton.addEventListener("click", () => resetData());
